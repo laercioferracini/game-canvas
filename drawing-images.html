@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Drwaing images</title>
+</head>
+
+<body>
+    <canvas id="canvas" width="1000" height="1000">
+        <script>
+            var canvas = document.getElementById('canvas');
+            var context = canvas.getContext('2d');
+            var w = canvas.width;
+            var h = canvas.height;
+            context.fillStyle = 'red';
+            var image = new Image();
+            image.src = 'images/cat-vibe.gif';
+            image.onload = function () {
+                // drawImage
+                //começar na position 20
+                var x = 20;
+                //desenhar as imagens
+                for (let i = 0; i < 5; i++) {
+                    context.drawImage(image, x, 20, 64, 32);
+                    x += 70;
+                }
+                x = 20;
+                for (let i = 0; i < 5; i++) {
+                    context.drawImage(image, x, 64, 64, 32);
+                    x += 70;
+                }
+
+                x = 20;
+                for (let i = 0; i < 5; i++) {
+                    context.drawImage(image, x, 104, 128, 64);
+                    x += 134;
+                }
+            }
+
+            var explosao = new Image();
+            explosao.src = 'images/explosao.png';
+            explosao.onload = function () {
+                context.drawImage(explosao,
+                    80, 10, 60, 65, //Área de recorte da imagem(clipping)
+                    20, 180, 60, 65)
+            }
+        </script>
+    </canvas>
+</body>
+
+</html>
