@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Animações com RequestAnimationFramw</title>
+    <style>
+        body {
+            background: #dddddd;
+        }
+
+        #canvas {
+            margin: 20px;
+            padding: 20px;
+            background: #ffffff;
+            border: thin inset #aaaaaa;
+            width: 600px;
+            height: 300px;
+        }
+    </style>
+</head>
+
+<body onload="displayDate()">
+
+    <h1>Animação</h1>
+    <span>Mover para:</span>
+    <div>
+        <button id="right">Direita</button>
+        <button id="left">Esquerda</button>
+        <button id="up">Cima</button>
+        <button id="down">Baixo</button>
+        <button id="diagonal-sl-ir">Diagonal Esquerda-Direita</button>
+        <button id="diagonal-il-sr">Diagonal Inferior Esquerda-Superior Direita</button>
+    </div>
+    <canvas id="canvas" width="600" height="300">
+        Canvas not supported :(|)
+        <!-- <script src="../js/animation.js"></script> -->
+        <script>
+            function displayDate() {
+                document.getElementById("demo").innerHTML = new Date();
+            }
+
+            var bDir = document.getElementById('right');
+            var bEsq = document.getElementById('left');
+            var bCim = document.getElementById('up');
+            var bBai = document.getElementById('down');
+            var bDslir = document.getElementById('diagonal-sl-ir');
+            var bDilsr = document.getElementById('diagonal-il-sr');
+
+            var canvas = document.getElementById('canvas');
+            var context = canvas.getContext('2d');
+            var w = canvas.width;
+            var h = canvas.height;
+            console.log("w:" + w)
+            console.log("h:" + h)
+
+
+            //Deslocando a bola
+            var velocidade = 20;
+
+
+
+            bDir.onclick = function () {
+
+                var x = 20;
+                var y = 100;
+                var raio = 5;
+
+                //Momento inicial
+
+                var anterior = new Date().getTime();
+                //iniciar a animação
+                requestAnimationFrame(mexerBola);
+
+                //função de animação
+                function mexerBola() {
+                    var agora = new Date().getTime();
+                    var decorrido = agora - anterior;
+
+                    //Limpar o Canvas
+                    context.clearRect(0, 0, w, h);
+
+                    //Desenhar a bola
+                    context.beginPath();
+                    context.arc(x, y, raio, 0, Math.PI * 2);
+                    context.fill();
+
+                    //mover
+                    //mover(x, y, direcao);
+                    var velocidade = 20;
+                    x += (velocidade * decorrido) / 200;
+                    //console.debug(x);
+                    anterior = agora;
+                    //chamar o próximo ciclo de animação
+                    requestAnimationFrame(mexerBola);
+                }
+            }
+
+
+
+        </script>
+    </canvas>
+
+    <div id="hora">
+        <p id="demo">dasdasdasd</p>
+    </div>
+</body>
+
+</html>

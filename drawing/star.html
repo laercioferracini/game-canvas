@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Drawing a Star</title>
+</head>
+
+<body>
+    <h1>Desenhando uma estrela</h1>
+    <canvas id="canvas" width="500" height="500">
+        <script>
+
+            var canvas = document.getElementById('canvas');
+            var context = canvas.getContext('2d');
+            var w = canvas.width;
+            var h = canvas.height;
+
+            context.strokeStyle = 'red';
+            context.lineWidth = 2;
+
+            context.beginPath();
+            //desenhar uma estrela
+            context.moveTo(75, 250);
+            context.lineTo(150, 50);
+            context.lineTo(225, 250);
+            context.lineTo(50, 120);
+            context.lineTo(250, 120);
+            context.lineTo(75, 250);
+
+
+
+            context.stroke();
+
+        </script>
+    </canvas>
+</body>
+
+</html>

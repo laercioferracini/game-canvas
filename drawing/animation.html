@@ -1,0 +1,221 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Animações com RequestAnimationFramw</title>
+    <style>
+        body {
+            background: #dddddd;
+        }
+
+        #canvas {
+            margin: 20px;
+            padding: 20px;
+            background: #ffffff;
+            border: thin inset #aaaaaa;
+            width: 600px;
+            height: 300px;
+        }
+    </style>
+</head>
+
+<body>
+
+    <h1>Animação</h1>
+    <span>Move para:</span>
+    <div>
+        <button id="right">Direita</button>
+        <button id="left">Esquerda</button>
+        <button id="up">Cima</button>
+        <button id="down">Baixo</button>
+        <button id="diagonal-sl-ir">Diagonal Esquerda-Direita</button>
+        <button id="diagonal-il-sr">Diagonal Inferior Esquerda-Superior Direita</button>
+    </div>
+    <canvas id="canvas" width="600" height="300">
+        Canvas not supported :(|)
+        <!-- <script src="../js/animation.js"></script> -->
+        <script>
+            var bDir = document.getElementById('right');
+            var bEsq = document.getElementById('left');
+            var bCim = document.getElementById('up');
+            var bBai = document.getElementById('down');
+            var bDslir = document.getElementById('diagonal-sl-ir');
+            var bDilsr = document.getElementById('diagonal-il-sr');
+
+            var canvas = document.getElementById('canvas');
+            var context = canvas.getContext('2d');
+            var w = canvas.width;
+            var h = canvas.height;
+            console.log("w:" + w)
+            console.log("h:" + h)
+
+            bDir.onclick = function () {
+
+                var x = 20;
+                var y = 100;
+                var raio = 5;
+
+                //iniciar a animação
+                requestAnimationFrame(mexerBola);
+                direcao = 'r';
+                //função de animação
+                function mexerBola() {
+                    //Limpar o Canvas
+                    context.clearRect(0, 0, w, h);
+                    //Desenhar a bola
+                    context.beginPath();
+                    context.arc(x, y, raio, 0, Math.PI * 2);
+                    context.fill();
+                    //mover
+                    //mover(x, y, direcao);
+                    x += 20;
+                    //chamar o próximo ciclo de animação
+                    requestAnimationFrame(mexerBola);
+                }
+            }
+
+            bEsq.onclick = function () {
+
+                var x = w;
+                var y = h / 2;
+                var raio = 5;
+
+                //iniciar a animação
+                requestAnimationFrame(mexerBola);
+                direcao = 'l';
+                //função de animação
+                function mexerBola() {
+                    //Limpar o Canvas
+                    context.clearRect(0, 0, w, h);
+
+                    //Desenhar a bola
+                    context.beginPath();
+                    context.arc(x, y, raio, 0, Math.PI * 2);
+                    context.fill();
+
+                    //mover(x, y, direcao);
+                    x -= 20;
+                    //chamar o próximo ciclo de animação
+                    requestAnimationFrame(mexerBola);
+                }
+
+            }
+            bCim.onclick = function () {
+
+                var x = w / 2;
+                var y = h;
+                var raio = 5;
+
+                //iniciar a animação
+                requestAnimationFrame(mexerBola);
+                direcao = 'u';
+                //função de animação
+                function mexerBola() {
+                    //Limpar o Canvas
+                    context.clearRect(0, 0, w, h);
+
+                    //Desenhar a bola
+                    context.beginPath();
+                    context.arc(x, y, raio, 0, Math.PI * 2);
+                    context.fill();
+
+                    //mover(x, y, direcao);
+                    y -= 20;
+                    //chamar o próximo ciclo de animação
+                    requestAnimationFrame(mexerBola);
+                }
+
+            }
+            bBai.onclick = function () {
+
+                var x = w / 2;
+                var y = 0;
+                var raio = 5;
+
+                //iniciar a animação
+                requestAnimationFrame(mexerBola);
+                direcao = 'u';
+                //função de animação
+                function mexerBola() {
+                    //Limpar o Canvas
+                    context.clearRect(0, 0, w, h);
+
+                    //Desenhar a bola
+                    context.beginPath();
+                    context.arc(x, y, raio, 0, Math.PI * 2);
+                    context.fill();
+
+                    //mover(x, y, direcao);
+                    y += 20;
+                    //chamar o próximo ciclo de animação
+                    requestAnimationFrame(mexerBola);
+                }
+
+            }
+
+            bDslir.onclick = function () {
+
+                var x = 0;
+                var y = 0;
+                var raio = 5;
+                var d = 1;
+                //iniciar a animação
+                requestAnimationFrame(mexerBola);
+
+                //função de animação
+                function mexerBola() {
+                    //Limpar o Canvas
+                    context.clearRect(0, 0, w, h);
+
+                    //Desenhar a bola
+                    context.beginPath();
+                    context.arc(x, y, raio, 0, Math.PI * 2);
+                    context.fill();
+
+                    //mover(x, y, direcao);
+
+                    d += 1;
+                    x += Math.pow(d, 2);
+                    y += Math.pow(d, 2); //na verdade usar uma equação do primeiro grau
+
+                    //chamar o próximo ciclo de animação
+                    requestAnimationFrame(mexerBola);
+                }
+
+            }
+            bDilsr.onclick = function () {
+
+                var x = 0;
+                var y = h;
+                var raio = 5;
+                var d = 10;
+                //iniciar a animação
+                requestAnimationFrame(mexerBola);
+
+                //função de animação
+                function mexerBola() {
+                    //Limpar o Canvas
+                    context.clearRect(0, 0, w, h);
+
+                    //Desenhar a bola
+                    context.beginPath();
+                    context.arc(x, y, raio, 0, Math.PI * 2);
+                    context.fill();
+
+                    //mover(x, y, direcao);
+
+                    x += d;
+                    y -= d; //na verdade usar uma equação do primeiro grau
+                    //chamar o próximo ciclo de animação
+                    requestAnimationFrame(mexerBola);
+                }
+
+            }
+
+        </script>
+    </canvas>
+</body>
+
+</html>

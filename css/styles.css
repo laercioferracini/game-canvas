@@ -1,0 +1,20 @@
+body {
+    background: #dbdcdf83;
+}
+
+#canvas {
+    margin: 20px;
+    padding: 20px;
+    background: #ffffff;
+    border: thin inset #a88e8e;
+    width: 600px;
+    height: 300px;
+}
+#canvas_car {
+    margin: 20px;
+    padding: 20px;
+    background: #ffffff;
+    border: thin inset #a88e8e;
+    width: 600px;
+    height: 300px;
+}

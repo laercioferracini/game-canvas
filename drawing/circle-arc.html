@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Rectangle</title>
+</head>
+
+<body>
+
+    <h1>Desenhando um circunferência e arcos</h1>
+    <canvas id="canvas" width="500" height="500">
+        <script>
+            /**
+             * • x, y: as coordenadas do ponto central da circunferência;
+             * • raio da circunferência em pixels;
+             * • ângulo inicial em radianos;
+             * • ângulo final em radianos;
+             * • sentido: aqui você pode passar false (sentido anti-horário) ou true 
+             *   (sentido horário). Este parâmetro é opcional; se omitido, o desenho é
+             *   feito no sentido anti-horário.
+             */
+            function radiano(grau) {
+                return (grau * Math.PI) / 180;
+            }
+            var canvas = document.getElementById('canvas');
+            var context = canvas.getContext('2d');
+            var w = canvas.width;
+            var h = canvas.height;
+            context.fillStyle = 'red';
+            context.lineWidth = 2;
+
+            context.beginPath();
+            context.arc(w / 2, h / 2, 250, 0, 2 * Math.PI, true);
+            context.fill();
+            context.stroke();
+
+            context.beginPath();
+            context.arc(0, 0, 100, radiano(90), radiano(270), true);
+            context.fill();
+            context.stroke();
+
+            context.beginPath();
+            context.arc(w, 0, 100, radiano(90), radiano(270), false);
+            context.fill();
+            context.stroke();
+
+            context.beginPath();
+            context.arc(w, h, 100, radiano(90), radiano(270), false);
+            context.fill();
+            context.stroke();
+
+            context.beginPath();
+            context.arc(0, h, 100, radiano(90), radiano(270), true);
+            context.fill();
+            context.stroke();
+            function circle(x, y, raio,)
+        </script>
+    </canvas>
+</body>
+
+</html>
