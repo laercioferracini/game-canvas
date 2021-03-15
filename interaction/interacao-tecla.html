@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Movimentando personagem com keydown</title>
+</head>
+
+<body>
+    <!-- Para o desenvolvimento de jogos, somente os eventos keydown e
+    keyup serão necessários. Tudo o que nós precisaremos saber serão os
+    momentos quando uma tecla é pressionada e quando é solta, para poder
+    disparar ações ao pressionar ou detectar se uma tecla está ou não pressionada. 
+    O evento keypress é específico para tratar digitação de caracteres. -->
+
+    <canvas id="canvas_teclado_1" width="500" height="500">
+        <script>
+            var canvas = document.getElementById('canvas_teclado_1');
+            var context = canvas.getContext('2d');
+
+            var posicao = 0;
+            desenharPersonagem();
+
+            document.addEventListener('keydown', function (evento) {
+                if (evento.keyCode == 37) { //seta para esquerda
+                    posicao -= 10;
+                    desenharPersonagem();
+                } else if (evento.keyCode == 39) { //seta para direita
+                    posicao += 10;
+                    desenharPersonagem();
+                }
+            });
+            //o personagem
+            function desenharPersonagem() {
+                context.clearRect(0, 0, canvas.width, canvas.height);
+                context.fillRect(posicao, 100, 20, 50);
+            }
+        </script>
+    </canvas>
+</body>
+
+</html>
