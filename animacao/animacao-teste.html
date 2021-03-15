@@ -11,8 +11,15 @@
 </head>
 
 <body>
+    <div>
+        <input type="checkbox" id="ligar" name="ligar" value="ligar" checked>
+        <label for="ligar">Ligar?</label><br>
+        <input type="checkbox" id="limpaTela" name="limpaTela" value="limpaTela" checked>
+        <label for="limpaTela"> Limpar a tela</label><br>
+    </div>
     <canvas id="canvas_anim" width="500" height="500">
         <script>
+
             var canvas = document.getElementById('canvas_anim');
             var context = canvas.getContext('2d');
 
@@ -45,7 +52,7 @@
              * Procure fazer com que uma classe receba de fora e guarde em atributos tudo que ela precisa para executar seu trabalho, de forma que ela fique
              * completamente desacoplada do meio externo. Depender diretamente da variável context do aplicativo é mau negócio! Este princípio chama-se
              * 'injeção de dependências'.
-            */
+             */
             //criando o loop de animação
             var animacao = new Animacao(context);
             animacao.novoSprite(b1);
@@ -54,6 +61,19 @@
 
             //"Ligar" a animação
             animacao.ligar();
+
+
+            var cLigar = document.getElementById('ligar');
+            cLigar.onclick = function () {
+                if (cLigar.checked) animacao.ligar();
+                else animacao.desligar();
+            }
+
+            var cLimpaTela = document.getElementById('limpaTela');
+            cLimpaTela.onclick = function () {
+                animacao.limpaTela = cLimpaTela.checked;
+            }
+            
         </script>
     </canvas>
 </body>
