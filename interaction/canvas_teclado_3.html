@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Um herói que atira</title>
+    <script src="../js/teclado.js"></script>
+    <script src="../js/heroi.js"></script>
+    <script src="../js/bola.js"></script>
+    <script src="../js/animacao.js"></script>
+</head>
+
+<body>
+    <canvas id="canvas_teclado_2" width="500" height="500">
+        <script>
+            var canvas = document.getElementById('canvas_teclado_2');
+            var context = canvas.getContext('2d');
+            var teclado = new Teclado(document);
+            var animacao = new Animacao(context);
+
+            //Um sprite pode ler o teclado para saber  como se comportar
+            var heroi = new Heroi(context, teclado, animacao);
+
+            heroi.x = 0;
+            heroi.y = 10;
+            animacao.novoSprite(heroi);
+
+            teclado.disparou(ESPACO, function () {
+                heroi.atirar();
+            });
+            animacao.ligar();
+
+        </script>
+    </canvas>
+</body>
+
+</html>

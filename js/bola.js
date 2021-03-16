@@ -11,7 +11,7 @@ class Bola {
         this.raio = 10;
     }
 
-    atualizar() {
+    static atualizar() {
         var ctx = this.context;
         if (this.x < this.raio || this.x > ctx.canvas.width - this.raio)
             this.velocidadeX *= -1;
