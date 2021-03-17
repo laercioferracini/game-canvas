@@ -19,6 +19,7 @@ class Teclado {
 
         //Funções disparos
         this.funcoesDisparos = [];
+        
         //Registrando o estado das teclas no array
         var teclado = this;
 

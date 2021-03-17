@@ -32,7 +32,7 @@ class Spritesheet {
 
         var larguraQuadro = this.imagem.width / this.colunas;
         var alturaQuadro = this.imagem.height / this.linhas;
-        
+
         this.context.drawImage(
             this.imagem,
             larguraQuadro * this.coluna,
@@ -47,8 +47,8 @@ class Spritesheet {
         this.context.lineWidth = 2;
         this.context.strokeStyle = 'red';
         this.context.beginPath();
-        this.context.moveTo(0, y + alturaQuadro-5);
-        this.context.lineTo(this.context.canvas.width, y + alturaQuadro-5);
+        this.context.moveTo(0, y + alturaQuadro - 3);
+        this.context.lineTo(this.context.canvas.width, y + alturaQuadro - 3);
         this.context.stroke();
     }
 }
