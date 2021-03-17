@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>\>Testando a classe Spritesheet</title>
+    <link rel="stylesheet" href="../css/styles.css">
+    <script src="../js/spritesheet.js"></script>
+</head>
+<body>
+    <canvas id="canvas_spritesheet_1" width="500" height="500">
+        <script>
+            var context = document.getElementById('canvas_spritesheet_1').getContext('2d');
+
+            var imgSonic = new Image();
+            imgSonic.src ='../images/spritesheet.png'
+            // Quero passar: context, imagem, linhas, colunas
+            var sheet = new Spritesheet(context, imgSonic, 3, 8);
+            //duração de cada quadro
+            sheet.intervalo = 60;
+            //correndo para direita
+            sheet.linha = 1;
+            //Animaçção
+            imgSonic.onload = gameLoop;
+
+            function gameLoop(){
+                context.clearRect(0,0,context.canvas.width, context.canvas.height);
+
+                //avançar para o proximo quadro
+                sheet.proximoQuadro();
+
+                //onde desenhar
+                sheet.desenhar(100, 100);
+                requestAnimationFrame(gameLoop);
+            }
+        </script>
+    </canvas>
+</body>
+</html>
