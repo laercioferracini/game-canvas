@@ -1,7 +1,14 @@
 body {
     background: #dbdcdf83;
 }
-
+canvas{
+    margin: 20px;
+    padding: 20px;
+    background: #ffffff;
+    border: thin inset #a88e8e;
+    width: 500px;
+    height: 500px;    
+}
 #canvas {
     margin: 20px;
     padding: 20px;
