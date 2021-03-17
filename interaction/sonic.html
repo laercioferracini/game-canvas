@@ -20,31 +20,28 @@
             var colunas = 8;
             var linhas = 3;
             // Dimensão de cada quadro
-            var largura = imgSonic.width / colunas;
-            var altura = imgSonic.height / linhas;
+            var slargura = imgSonic.width / colunas;
+            var saltura = imgSonic.height / linhas;
             // Quadro que eu quero (expresso em linha e coluna)
             var coluna = 0;
-            var linha = 1;
+            var linha = 0;
             // Posição de recorte
-            var x = largura * coluna;
-            var y = altura * linha;
+            var sx = slargura * coluna;
+            var sy = saltura * linha;
             
             var context = document.getElementById('canvas_clipping').getContext('2d');
-            for (let index = 0; index <= colunas; index++) {
-                
-            
+            //context.drawImage()
             context.drawImage(
                 imgSonic,
-                largura * index,
-                y,
-                largura,
-                altura,
-                100+index*5, // Posição no canvas onde quero desenhar
-                100+index*40,
-                largura,
-                altura
+                sx,
+                sy,
+                slargura,
+                saltura,
+                100, // Posição no canvas onde quero desenhar
+                100,
+                slargura,
+                saltura
             );
-            }
         }
     </script>
 </body>

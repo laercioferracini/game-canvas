@@ -27,18 +27,28 @@ class Spritesheet {
     }
 
     desenhar(x, y) {
-        var larguraQuadro = this.imagem.width / this.numColunas;
-        var alturaQuadro = this.imagem.height / this.numLinhas;
+        // var largura = this.imagem.width / colunas;
+        // var altura = this.imagem.height / linhas;
+
+        var larguraQuadro = this.imagem.width / this.colunas;
+        var alturaQuadro = this.imagem.height / this.linhas;
+        
         this.context.drawImage(
             this.imagem,
             larguraQuadro * this.coluna,
             alturaQuadro * this.linha,
-            largura,
-            altura,
+            larguraQuadro,
+            alturaQuadro,
             x,
             y,
-            largura,
-            altura
+            larguraQuadro,
+            alturaQuadro
         );
+        this.context.lineWidth = 2;
+        this.context.strokeStyle = 'red';
+        this.context.beginPath();
+        this.context.moveTo(0, y + alturaQuadro-5);
+        this.context.lineTo(this.context.canvas.width, y + alturaQuadro-5);
+        this.context.stroke();
     }
 }
