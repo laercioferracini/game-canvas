@@ -11,7 +11,7 @@ class Bola {
         this.raio = 10;
     }
 
-    static atualizar() {
+    atualizar() {
         var ctx = this.context;
         if (this.x < this.raio || this.x > ctx.canvas.width - this.raio)
             this.velocidadeX *= -1;
@@ -39,5 +39,22 @@ class Bola {
 
         //Voltar as configurações anteriores
         ctx.restore();
+    }
+
+    //Interface de colisão
+    retangulosColisao() {
+        return [
+            {
+                x: this.x - this.raio, //this.x é o centro da bola
+                y: this.y - this.raio, //this.y é o centro da bola
+                largura: this.raio * 2,
+                altura: this.raio * 2
+
+            }
+        ];
+    }
+
+    colidiumCom(sprite) {
+        console.log('aAaAAIN!' + sprite);
     }
 }
