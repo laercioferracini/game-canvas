@@ -9,11 +9,13 @@
     <link rel="stylesheet" href="../css/styles.css">
     <script src="../js/bola.js"></script>
     <script src="../js/colisor.js"></script>
+
 </head>
 
-<body>
-    <canvas id="canvas_colisao" width="500" height="500">
-        <script src="../js/teste-colisao.js"></script>
+<body onload="resize_canvas()" onresize=" resize_canvas() ">
+    <canvas id="canvas_colisao">
+        <script src="../js/canvas.js"></script>
+        <script src="../js/teste-colisao.js "></script>
     </canvas>
 </body>
 

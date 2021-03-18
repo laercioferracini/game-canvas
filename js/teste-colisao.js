@@ -1,5 +1,5 @@
-var canvas = document.getElementById('canvas_colisao');
-var context = canvas.getContext('2d');
+//context.canvas.width = window.innerWidth - 50
+//context.canvas.height = window.innerHeight - 50
 
 var b1 = new Bola(context);
 b1.x = 200;
@@ -39,7 +39,7 @@ colisor.novoSprite(b2);
 colisor.novoSprite(b3);
 colisor.novoSprite(b4);
 
-colisor.aoColidir = function (s1, s2) {
+colisor.aoColidir = function(s1, s2) {
     //console.log(s1.cor + 'colidiu com: ' + s2.cor);
     // this.velocidadeX *= -1;
     // this.velocidadeY *= -1;

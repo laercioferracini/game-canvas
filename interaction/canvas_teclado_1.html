@@ -14,10 +14,12 @@
     disparar ações ao pressionar ou detectar se uma tecla está ou não pressionada. 
     O evento keypress é específico para tratar digitação de caracteres. -->
 
-    <canvas id="canvas_teclado_1" width="500" height="500">
+    <canvas id="canvas_teclado_1">
         <script>
             var canvas = document.getElementById('canvas_teclado_1');
             var context = canvas.getContext('2d');
+            context.canvas.width = window.innerWidth;
+            context.canvas.height =window.innerHeight;
 
             var posicaoX = 0;
             var posicaoY = 100;
