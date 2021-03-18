@@ -31,7 +31,7 @@ class Bola {
 
         //Configurar o contexto de acordo com a bola
         ctx.fillStyle = this.cor;
-
+        //ctx.strokeRect(this.x - this.raio, this.y - this.raio, this.raio * 2, this.raio * 2);
         //Desenhar
         ctx.beginPath();
         ctx.arc(this.x, this.y, this.raio, 0, Math.PI * 2, false);
@@ -39,6 +39,7 @@ class Bola {
 
         //Voltar as configurações anteriores
         ctx.restore();
+
     }
 
     //Interface de colisão
@@ -49,12 +50,24 @@ class Bola {
                 y: this.y - this.raio, //this.y é o centro da bola
                 largura: this.raio * 2,
                 altura: this.raio * 2
-
             }
         ];
     }
 
-    colidiumCom(sprite) {
-        console.log('aAaAAIN!' + sprite);
+    colidiuCom(sprite) {
+        if (this.x < sprite.x)  // Estou na esquerda
+            this.velocidadeX = -Math.abs(this.velocidadeX);  // -
+        else
+            this.velocidadeX = Math.abs(this.velocidadeX);   // +
+
+        if (this.y < sprite.y)  // Estou acima
+            this.velocidadeY = -Math.abs(this.velocidadeY);  // -
+        else
+            this.velocidadeY = Math.abs(this.velocidadeY);   // +
+        // console.log(this.cor + 'colidiu com: ' + sprite);
+        //this.velocidadeX *= -1;
+        //this.velocidadeY *= -1;
+        //this.x += this.velocidadeX;
+        //this.y += this.velocidadeY;
     }
 }
