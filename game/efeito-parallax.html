@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Fundos rolando em Parallax</title>
+    <script src="../js/animacao.js"></script>
+    <script src="../js/fundo.js"></script>
+</head>
+
+<body>
+    <canvas id="canvas_fundo" width="500" height="500"></canvas>
+    <script>
+        var imgEspaco = new Image();
+        var imgEstrelas = new Image();
+        var imgNuvens = new Image();
+
+        imgEspaco.src = '../images/fundo-espaco.png';
+        imgEstrelas.src = '../images/fundo-estrelas.png';
+        imgNuvens.src = '../images/fundo-nuvens.png';
+
+        var carregadas = 0;
+        var total = 3;
+
+        imgEspaco.onload = carregando;
+        imgEstrelas.onload = carregando;
+        imgNuvens.onload = carregando;
+
+        function carregando() {
+            carregadas++;
+            if (carregadas == total) iniciar();
+        }
+
+        //funcao inciar
+        function iniciar(){
+            //carregar o canvas
+            var context = document.getElementById('canvas_fundo').getContext('2d');
+            
+            //instanciar as imagens de Fundo
+            var fundoEspaco = new Fundo(context, imgEspaco);
+            var fundoEstrelas = new Fundo(context, imgEstrelas);
+            var fundoNuvens = new Fundo(context, imgNuvens);
+            
+            //atribuir a velocidade de cada fundo
+            fundoEspaco.velocidade = 1;
+            fundoEstrelas.velocidade = 5;
+            fundoNuvens.velocidade = 7;
+
+            //adicionar as imagens na animacao().novoSprite
+            var animacao = new Animacao(context);
+            animacao.novoSprite(fundoEspaco);
+            animacao.novoSprite(fundoEstrelas);
+            animacao.novoSprite(fundoNuvens);
+            animacao.ligar();
+        }
+    </script>
+</body>
+
+</html>

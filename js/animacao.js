@@ -8,6 +8,7 @@ class Animacao {
 
     novoSprite(sprite) {
         this.sprites.push(sprite);
+        sprite.animacao = this;
     }
     /**
          * Temos uma implicação importante: todo objeto que quiser participar do loop de animação (ou seja, que quiser ser um sprite), 

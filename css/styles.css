@@ -8,7 +8,7 @@ body {
 
 canvas {
     margin: 5px;
-    padding: 5px;
+    
     background: #ffffff;
     border: thin inset #a88e8e;
 }
