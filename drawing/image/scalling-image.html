@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Scalling an image</title>
+    <link rel="stylesheet" href="../../css/styles.css">
+</head>
+
+<body>
+    <div>
+        <input type="checkbox" name="scaleImage" id="scaleImage">
+        <label for="scaleImage">Scale Image?</label>
+    </div>
+    <canvas id="canvas_colisao" width="1000" height="800">
+
+        <script>
+            const idCanvas = 'canvas_colisao';
+            var canvas = document.getElementById(idCanvas);
+            var context = canvas.getContext('2d');
+            var scaleCheckbox = document.getElementById('scaleImage');
+
+            function drawImage() {
+                context.clearRect(0, 0, canvas.width, canvas.height);
+                if (scaleCheckbox.checked) {
+                    context.drawImage(image, 0, 0, canvas.width, canvas.height);
+                } else {
+                    context.drawImage(image, 0, 0);
+                }
+            }
+
+            var image = new Image();
+            image.src = '../../images/29._art332022.jpg'
+            image.onload = function () {
+                context.drawImage(image, 0, 0);
+            }
+
+            scaleCheckbox.onclick = function () {
+                drawImage();
+            }
+        </script>
+    </canvas>
+</body>
+
+</html>
