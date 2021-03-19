@@ -13,7 +13,7 @@ var nave = new Nave(context, teclado, imgNave);
 animacao.novoSprite(nave);
 
 teclado.disparou(ESPACO, function () {
-    nave.atirar();
+    nave.atirar();    
 })
 // Quando carregar a imagem, iniciar a animação
 imgNave.onload = function () {
