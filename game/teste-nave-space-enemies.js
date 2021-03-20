@@ -73,7 +73,7 @@ function iniciar() {
 function novoOvni() {
     var ovni = new Ovni(context, imgOvni);
     // Mínimo: 5; máximo: 20
-    ovni.velocidade = aleatorio(5, 20);//Math.floor(5 + Math.random() * (20 - 5 + 1));
+    ovni.velocidade = aleatorio(5, 15);//Math.floor(5 + Math.random() * (20 - 5 + 1));
     // Mínimo: 0;
     // máximo: largura do canvas - largura do ovni
     ovni.x = aleatorio(0, context.canvas.width - imgOvni.width + 1);// Math.floor(Math.random() * (context.canvas.width - imgOvni.width + 1));

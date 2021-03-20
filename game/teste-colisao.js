@@ -47,7 +47,7 @@ teclado.disparou(ESPACO, function () {
     nave.atirar();
 });
 
-var colisor = new Colisao();
+var colisor     = new Colisao();
 colisor.novoSprite(nave);
 animacao.novoProcessamento(colisor);
 
