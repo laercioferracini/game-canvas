@@ -9,6 +9,7 @@ class Colisao {
 
     novoSprite(sprite) {
         this.sprites.push(sprite);
+        sprite.colisor = this;
     }
 
     processar() {
