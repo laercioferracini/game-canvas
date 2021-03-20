@@ -43,6 +43,10 @@ animacao.novoSprite(fundoEstrelas);
 animacao.novoSprite(fundoNuvens);
 animacao.novoSprite(nave);
 
+teclado.disparou(ESPACO, function () {
+    nave.atirar();
+});
+
 var carregadas = 0;
 var total = 5;
 
@@ -52,7 +56,7 @@ function carregando() {
 }
 
 
-//funcao inciar
+//funcao iniciar
 function iniciar() {
 
     //Centralizar na horizontal
