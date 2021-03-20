@@ -1,10 +1,11 @@
 // arquivo colisor
 
-class Colisao {
+class Colisor {
     constructor(context) {
         this.sprites = [];
         this.context = context;
-        this.aoColidir = {};
+        this.aoColidir = null;
+        this.spritesExcluir = [];
     }
 
     novoSprite(sprite) {
@@ -30,41 +31,39 @@ class Colisao {
                     if (!jaTestados[id2]) jaTestados[id2] = [];
 
                     //Teste de repetição
-                    if (!(jaTestados[id1].indexOf[id2] >= 0 || jaTestados[id2].indexOf[id1] >= 0)) {
+                    if (!(jaTestados[id1].indexOf(id2) >= 0 || jaTestados[id2].indexOf(id1) >= 0)) {
                         //Abstrair a colisão
                         this.testarColisao(s1, s2);
 
                         //Registrando o teste
-                        jaTestados[id1].push[id2];
-                        jaTestados[id2].push[id1];
+                        jaTestados[id1].push(id2);
+                        jaTestados[id2].push(id1);
                     }
                 }
             });
 
         });
+        this.processarExclusoes();
     }
 
-    testarColisao(sprite1, sprite2) {
-        //Obter os retângulos de colisão de cada sprite
-        var rets1 = sprite1.retangulosColisao();
-        var rets2 = sprite2.retangulosColisao();
+    excluirSprite(sprite) {
+        this.spritesExcluir.push(sprite);
+    }
 
-        //Testar as colisões entre eles
-        rets1.every(r1 => {
-            rets2.every(r2 => {
-                //AInda abstraindo a fórmula
-                if (this.retangulosColidem(r1, r2)) {
-                    //Eles colidem, vamos notificá-los
-                    sprite1.colidiuCom(sprite2);
-                    sprite2.colidiuCom(sprite1);
-                    //tratador geral
-                    if (this.aoColidir) this.aoColidir(sprite1, sprite2);
+    processarExclusoes() {
+        //Criar um array
+        var sobreviventes = [];
 
-                    //Não precisa terminar de ver todos os retângulos
-                    return;
-                }
-            });
+        //Adicionar somente os elementos não excluídos
+        this.sprites.forEach(s => {
+            if (this.spritesExcluir.indexOf(s) == -1) {
+                sobreviventes.push(s);
+            }
         });
+
+        //LImpar o array
+        this.spritesExcluir = [];
+        this.sprites = sobreviventes;
     }
 
     retangulosColidem(ret1, ret2) {
@@ -85,4 +84,29 @@ class Colisao {
 
         return str;
     }
+
+    testarColisao(sprite1, sprite2) {
+        //Obter os retângulos de colisão de cada sprite
+        var rets1 = sprite1.retangulosColisao();
+        var rets2 = sprite2.retangulosColisao();
+
+        //Testar as colisões entre eles
+        rets1.every(r1 => {
+            rets2.every(r2 => {
+                //AInda abstraindo a fórmula
+                if (this.retangulosColidem(r1, r2)) {
+                    //Eles colidem, vamos notificá-los
+                    sprite1.colidiuCom(sprite2);
+                    sprite2.colidiuCom(sprite1);
+
+                    //tratador geral
+                    if (this.aoColidir) this.aoColidir(sprite1, sprite2);
+
+                    //Não precisa terminar de ver todos os retângulos
+                    return;
+                }
+            });
+        });
+    }
+
 }

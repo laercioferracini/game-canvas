@@ -2,6 +2,7 @@
 
 class Ovni {
     constructor(context, imagem) {
+        this.name = 'marte1';
         this.context = context;
         this.imagem = imagem;
         this.x = 0;
@@ -15,6 +16,11 @@ class Ovni {
     }
     atualizar() {
         this.y += this.velocidade;
+
+        if (this.y > this.context.canvas.height + this.altura) {
+            this.animacao.excluirSprite(this);
+            this.colisor.excluirSprite(this);
+        }
     }
 
     desenhar() {
@@ -22,13 +28,14 @@ class Ovni {
         var img = this.imagem;
         ctx.drawImage(img, this.x, this.y, img.width, img.height);
     }
+
     retangulosColisao() {
         //var largura
         var rets =
             [
-                { x: this.x + 20, y: this.y + 1, largura: 25, altura: 10 },
-                { x: this.x + 2, y: this.y + 11, largura: 60, altura: 12 },
-                { x: this.x + 20, y: this.y + 23, largura: 25, altura: 7 },
+                { x: this.x + 15, y: this.y + 1, largura: 35, altura: 10 },
+                { x: this.x , y: this.y + 11, largura: 65, altura: 15 },
+                { x: this.x + 15, y: this.y + 23, largura: 35, altura: 7 },
             ];
 
         // Desenhando os retângulos para visualização
@@ -41,5 +48,13 @@ class Ovni {
         }
         return rets;
     }
-    colidiuCom() { }
+    colidiuCom(outro) {
+        //Se colidir com um Tiro, os dois desaparecem
+        if (outro instanceof Tiro) {
+            this.animacao.excluirSprite(this);
+            this.colisor.excluirSprite(this);
+            this.animacao.excluirSprite(outro);
+            this.colisor.excluirSprite(outro);
+        }
+    }
 }

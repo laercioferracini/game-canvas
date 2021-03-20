@@ -36,7 +36,8 @@ function iniciar() {
     var fundoEstrelas = new Fundo(context, imgEstrelas);
     var fundoNuvens = new Fundo(context, imgNuvens);
     var nave = new Nave(context, teclado, imgNave);
-
+    var colisor = new Colisor();
+    colisor.novoSprite(nave);
     //atribuir a velocidade de cada fundo
     fundoEspaco.velocidade = 1;
     fundoEstrelas.velocidade = 5;

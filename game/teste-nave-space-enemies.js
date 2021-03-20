@@ -46,7 +46,8 @@ animacao.novoSprite(nave);
 teclado.disparou(ESPACO, function () {
     nave.atirar();
 });
-
+var colisor = new Colisor(context);
+colisor.novoSprite(nave);
 var carregadas = 0;
 var total = 5;
 
@@ -82,7 +83,7 @@ function novoOvni() {
     ovni.y = -imgOvni.height;
 
     animacao.novoSprite(ovni);
-    //colisor.novoSprite(ovni);
+    colisor.novoSprite(ovni);
 }
 
 function aleatorio(min, max) {

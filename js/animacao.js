@@ -4,11 +4,22 @@ class Animacao {
         this.sprites = [];
         this.ligado = false;
         this.limpaTela = true;
+
         this.processamentos = [];
+        this.spritesExcluir = [];
+        this.processamentosExcluir = [];
     }
 
     desligar() {
         this.ligado = false;
+    }
+
+    excluirProcessamento(processamento) {
+        this.processamentosExcluir.push(processamento)
+    }
+
+    excluirSprite(sprite) {
+        this.spritesExcluir.push(sprite);
     }
 
     ligar() {
@@ -61,6 +72,9 @@ class Animacao {
         this.processamentos.forEach(p => {
             p.processar();
         });
+
+        //Processar exclusões
+        this.processarExclusoes();
         /**
          * A função de animação é chamada pelo JavaScript como uma função comum, não como um método de objeto — não podemos usar o this dentro dela
          * A solução é referenciar o objeto em uma variável e chamar uma função anônima, que por sua vez chama proximoFrame como um verdadeiro método do objeto:
@@ -72,5 +86,30 @@ class Animacao {
         });
     }
 
+    processarExclusoes() {
+        // Criar novos arrays
+        var novosSprites = [];
+        var novosProcessamentos = [];
+
+        // Adicionar somente se não constar no array de excluídos
+        this.sprites.forEach(s => {
+            if (this.spritesExcluir.indexOf(s) == -1) {
+                novosSprites.push(s);
+            }
+        });
+
+        this.processamentos.forEach(p => {
+            if (this.processamentosExcluir.indexOf(p) == -1)
+                novosProcessamentos.push(p);
+        });
+
+        // Limpar os arrays de exclusões
+        this.spritesExcluir = [];
+        this.processamentosExcluir = [];
+
+        // Substituir os arrays velhos pelos novos
+        this.sprites = novosSprites;
+        this.processamentos = novosProcessamentos;
+    }
 
 }

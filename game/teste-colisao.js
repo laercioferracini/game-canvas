@@ -5,6 +5,16 @@
  *  • Em seguida, instanciamos os objetos do game engine (animação, teclado, colisor) e os sprites, usando as imagens quando necessário;
  *  • Por último, criamos as funções de inicialização, que só devem executar quando as imagens estiverem completamente carregadas.
  */
+
+var btIniciar = document.getElementById('iniciar');
+btIniciar.onclick = function () {
+    location.reload();
+}
+
+
+var energia = document.getElementById('energia');
+
+
 var imgEspaco = new Image();
 var imgEstrelas = new Image();
 var imgNuvens = new Image();
@@ -32,12 +42,14 @@ var animacao = new Animacao(context);
 var fundoEspaco = new Fundo(context, imgEspaco);
 var fundoEstrelas = new Fundo(context, imgEstrelas);
 var fundoNuvens = new Fundo(context, imgNuvens);
+
 //atribuir a velocidade de cada fundo
 fundoEspaco.velocidade = 1;
 fundoEstrelas.velocidade = 5;
 fundoNuvens.velocidade = 7;
 
 var nave = new Nave(context, teclado, imgNave);
+
 animacao.novoSprite(fundoEspaco);
 animacao.novoSprite(fundoEstrelas);
 animacao.novoSprite(fundoNuvens);
@@ -47,7 +59,8 @@ teclado.disparou(ESPACO, function () {
     nave.atirar();
 });
 
-var colisor     = new Colisao();
+//Colisão
+var colisor = new Colisor();
 colisor.novoSprite(nave);
 animacao.novoProcessamento(colisor);
 
@@ -77,7 +90,7 @@ function iniciar() {
 function novoOvni() {
     var ovni = new Ovni(context, imgOvni);
     // Mínimo: 5; máximo: 20
-    ovni.velocidade = aleatorio(5, 20);//Math.floor(5 + Math.random() * (20 - 5 + 1));
+    ovni.velocidade = aleatorio(5, 7);//Math.floor(5 + Math.random() * (20 - 5 + 1));
     // Mínimo: 0;
     // máximo: largura do canvas - largura do ovni
     ovni.x = aleatorio(0, context.canvas.width - imgOvni.width + 1);// Math.floor(Math.random() * (context.canvas.width - imgOvni.width + 1));
@@ -86,9 +99,15 @@ function novoOvni() {
     ovni.y = -imgOvni.height;
 
     animacao.novoSprite(ovni);
-    //colisor.novoSprite(ovni);
+    colisor.novoSprite(ovni);
 }
 
 function aleatorio(min, max) {
     return min + Math.floor(Math.random() * (max - min + 1));
 }
+
+var btDesligar = document.getElementById('desligar');
+btDesligar.onclick = function () {
+    animacao.desligar();
+}
+energia.innerHTML = nave.energia;
