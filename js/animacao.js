@@ -21,7 +21,7 @@ class Animacao {
         if (!this.ligado) return;
 
         //A cada ciclo, limpamos a tela ou desenhamos um fundo
-        this.limparTela();
+        //this.limparTela();
 
         //Atualizamos o estado dos sprites
         this.sprites.forEach(element => {
