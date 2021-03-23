@@ -81,11 +81,12 @@ function iniciar() {
     nave.y = context.canvas.height - imgNave.height;
     nave.velocidade = 5;
     animacao.ligar();
-
-    setInterval(novoOvni, 1000);
+    spawnInimigos();
 }
 
-
+function spawnInimigos(){
+    setInterval(novoOvni, 1000);
+}
 // Criação dos inimigos
 function novoOvni() {
     var ovni = new Ovni(context, imgOvni);
@@ -110,4 +111,3 @@ var btDesligar = document.getElementById('desligar');
 btDesligar.onclick = function () {
     animacao.desligar();
 }
-energia.innerHTML = nave.energia;

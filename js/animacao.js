@@ -15,6 +15,7 @@ class Animacao {
     }
 
     excluirProcessamento(processamento) {
+
         this.processamentosExcluir.push(processamento)
     }
 
@@ -61,12 +62,13 @@ class Animacao {
         //Atualizamos o estado dos sprites
         this.sprites.forEach(sp => {
             sp.atualizar();
+            sp.desenhar();
         });
 
         //Desenhamos os sprites
-        this.sprites.forEach(sp => {
-            sp.desenhar();
-        });
+        // this.sprites.forEach(sp => {
+
+        // });
 
         //Processamentos gerais
         this.processamentos.forEach(p => {
@@ -92,15 +94,16 @@ class Animacao {
         var novosProcessamentos = [];
 
         // Adicionar somente se não constar no array de excluídos
-        this.sprites.forEach(s => {
-            if (this.spritesExcluir.indexOf(s) == -1) {
-                novosSprites.push(s);
+        this.sprites.forEach((s, index) => {
+            if (this.spritesExcluir.indexOf(s) != -1) {
+
+                this.sprites.splice(index, 1);
             }
         });
 
-        this.processamentos.forEach(p => {
-            if (this.processamentosExcluir.indexOf(p) == -1)
-                novosProcessamentos.push(p);
+        this.processamentos.forEach((p, index) => {
+            if (this.processamentosExcluir.indexOf(p) != -1)
+                this.processamentos.splice(index, 1);
         });
 
         // Limpar os arrays de exclusões
@@ -108,8 +111,8 @@ class Animacao {
         this.processamentosExcluir = [];
 
         // Substituir os arrays velhos pelos novos
-        this.sprites = novosSprites;
-        this.processamentos = novosProcessamentos;
+        //this.sprites = novosSprites;
+        //this.processamentos = novosProcessamentos;
     }
 
 }

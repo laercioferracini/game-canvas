@@ -19,7 +19,7 @@ class Tiro {
     atualizar() {
         this.y -= this.velocidade;
         // Excluir o tiro quando sumir da tela
-        if (this.y < -this.altura) {
+        if (this.y < 0) {
             this.animacao.excluirSprite(this);
             this.colisor.excluirSprite(this);
         }

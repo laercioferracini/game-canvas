@@ -68,28 +68,24 @@ class Nave {
     }
 
     colidiuCom(outro) {
-        this.energia--;
 
         //Se colidir com o ovni, game over
         if (outro instanceof Ovni) {
-            this.energia--;
 
-            if (this.energia == 0) {
-                this.animacao.desligar();
-                //this.context.clearRect(0, 0, this.context.canvas.width, this.context.canvas.height);
-                var ctx = this.context;
-                ctx.save();
-                ctx.font = '38pt Arial';
-                ctx.fillStyle = 'white';
-                ctx.strokeStyle = 'blue';
+            this.animacao.desligar();
+            //this.context.clearRect(0, 0, this.context.canvas.width, this.context.canvas.height);
+            var ctx = this.context;
+            ctx.save();
+            ctx.font = '38pt Arial';
+            ctx.fillStyle = 'white';
+            ctx.strokeStyle = 'blue';
 
-                var w = ctx.canvas.width;
-                var h = ctx.canvas.height;
+            var w = ctx.canvas.width;
+            var h = ctx.canvas.height;
 
-                ctx.fillText("Game over!", w / 2 - 150, h / 2 + 15, w);
-                ctx.strokeText("Game over!", w / 2 - 150, h / 2 + 15, w);
-                ctx.restore();
-            }
+            ctx.fillText("Game over!", w / 2 - 150, h / 2 + 15, w);
+            ctx.strokeText("Game over!", w / 2 - 150, h / 2 + 15, w);
+            ctx.restore();
         }
     }
 }

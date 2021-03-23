@@ -47,23 +47,19 @@ class Colisor {
     }
 
     excluirSprite(sprite) {
+
         this.spritesExcluir.push(sprite);
     }
 
     processarExclusoes() {
-        //Criar um array
-        var sobreviventes = [];
 
-        //Adicionar somente os elementos não excluídos
-        this.sprites.forEach(s => {
-            if (this.spritesExcluir.indexOf(s) == -1) {
-                sobreviventes.push(s);
+        //Percorrer o array de sprites e excluir o elemento
+        this.sprites.forEach((s, index) => {
+            if (this.spritesExcluir.indexOf(s) != -1) {
+                this.sprites.splice(index, 1);
             }
         });
-
-        //LImpar o array
         this.spritesExcluir = [];
-        this.sprites = sobreviventes;
     }
 
     retangulosColidem(ret1, ret2) {
