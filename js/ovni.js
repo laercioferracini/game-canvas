@@ -10,9 +10,9 @@ class Ovni {
         this.velocidade = 0;
     }
     atirar() {
-        var t = new Tiro(this.context, this);
-        this.animacao.novoSprite(t);
-        this.colisor.novoSprite(t);
+        //var t = new Tiro(this.context, this);
+        //this.animacao.novoSprite(t);
+        //this.colisor.novoSprite(t);
     }
     atualizar() {
         this.y += this.velocidade;

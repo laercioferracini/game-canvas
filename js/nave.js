@@ -43,9 +43,27 @@ class Nave {
     }
 
     atirar() {
-        var t = new Tiro(this.context, this);
+        //Forma dinâmica 
+        //const angle = Math.atan2(y1 - this.x, x1 - this.y);
+        //const velocity = { x: Math.cos(angle) * 6, y: Math.sin(angle) * 6 };
+        //var t = new Tiro(this.context, this, 'green', velocity);
+        //TODO criar bônus para aumentar os tiros e deixá-los mais rápidos
+        var t = new Tiro(this.context, this, 'red', { x: 0, y: -7 });
+        var t2 = new Tiro(this.context, this, 'red', { x: -1, y: -7 });
+        var t3 = new Tiro(this.context, this, 'red', { x: 1, y: -7 });
+        var t4 = new Tiro(this.context, this, 'black', { x: -2, y: -10 });
+        var t5 = new Tiro(this.context, this, 'black', { x: 2, y: -10 });
         this.animacao.novoSprite(t);
         this.colisor.novoSprite(t);
+        this.animacao.novoSprite(t2);
+        this.colisor.novoSprite(t2);
+        this.animacao.novoSprite(t3);
+        this.colisor.novoSprite(t3);
+        this.animacao.novoSprite(t4);
+        this.colisor.novoSprite(t4);
+        this.animacao.novoSprite(t5);
+        this.colisor.novoSprite(t5);
+
     }
 
     retangulosColisao() {
