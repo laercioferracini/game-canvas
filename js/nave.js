@@ -51,8 +51,8 @@ class Nave {
         var t = new Tiro(this.context, this, 'red', { x: 0, y: -7 });
         var t2 = new Tiro(this.context, this, 'red', { x: -1, y: -7 });
         var t3 = new Tiro(this.context, this, 'red', { x: 1, y: -7 });
-        var t4 = new Tiro(this.context, this, 'black', { x: -2, y: -10 });
-        var t5 = new Tiro(this.context, this, 'black', { x: 2, y: -10 });
+        var t4 = new Tiro(this.context, this, 'white', { x: -2, y: -10 });
+        var t5 = new Tiro(this.context, this, 'white', { x: 2, y: -10 });
         this.animacao.novoSprite(t);
         this.colisor.novoSprite(t);
         this.animacao.novoSprite(t2);
@@ -89,21 +89,24 @@ class Nave {
 
         //Se colidir com o ovni, game over
         if (outro instanceof Ovni) {
+            this.energia--;
+            console.log(this.energia);
+            if (this.energia == 3) {
+                this.animacao.desligar();
+                //this.context.clearRect(0, 0, this.context.canvas.width, this.context.canvas.height);
+                var ctx = this.context;
+                ctx.save();
+                ctx.font = '38pt Arial';
+                ctx.fillStyle = 'white';
+                ctx.strokeStyle = 'blue';
 
-            this.animacao.desligar();
-            //this.context.clearRect(0, 0, this.context.canvas.width, this.context.canvas.height);
-            var ctx = this.context;
-            ctx.save();
-            ctx.font = '38pt Arial';
-            ctx.fillStyle = 'white';
-            ctx.strokeStyle = 'blue';
+                var w = ctx.canvas.width;
+                var h = ctx.canvas.height;
 
-            var w = ctx.canvas.width;
-            var h = ctx.canvas.height;
-
-            ctx.fillText("Game over!", w / 2 - 150, h / 2 + 15, w);
-            ctx.strokeText("Game over!", w / 2 - 150, h / 2 + 15, w);
-            ctx.restore();
+                ctx.fillText("Game over!", w / 2 - 150, h / 2 + 15, w);
+                ctx.strokeText("Game over!", w / 2 - 150, h / 2 + 15, w);
+                ctx.restore();
+            }
         }
     }
 }
