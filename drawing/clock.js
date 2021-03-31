@@ -79,14 +79,14 @@ function drawTime(context, radius) {
     let second = now.getSeconds();
     //hour
     hour = hour % 12;
-    hour = (hour * Math.PI / 6) + (minute * Math.PI / (6 * 60)) + (second * Math.PI / (360 * 60));
+    hour = ((hour * Math.PI) / 6) + ((minute * Math.PI) / (6 * 60)) + ((second * Math.PI) / (360 * 60));
 
     drawHand(context, hour, radius * 0.5, radius * 0.07);
     //minute
-    minute = (minute * Math.PI / 30) + (second * Math.PI / (30 * 60));
+    minute = ((minute * Math.PI) / 30) + ((second * Math.PI) / (30 * 60));
     drawHand(context, minute, radius * 0.8, radius * 0.07);
     // second
-    second = (second * Math.PI / 30);
+    second = ((second * Math.PI) / 30);
     drawHand(context, second, radius * 0.9, radius * 0.02);
 }
 
