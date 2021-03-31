@@ -66,7 +66,7 @@ function drawNumbers(context, radius) {
         context.rotate(-angle);
         context.fillText('·', 0, 0);
         context.rotate(angle);
-        context.translate(0, radius * 0.9)
+        context.translate(0, radius * 0.92)
         context.rotate(-angle);
 
     }
@@ -90,15 +90,15 @@ function drawTime(context, radius) {
     drawHand(context, second, radius * 0.9, radius * 0.02);
 }
 
-function drawHand(ctx, pos, length, width) {
-    ctx.beginPath();
-    ctx.lineWidth = width;
-    ctx.lineCap = 'round';
-    ctx.moveTo(0, 0);
-    ctx.rotate(pos);
-    ctx.lineTo(0, -length);
-    ctx.stroke();
-    ctx.rotate(-pos);
+function drawHand(context, pos, length, width) {
+    context.beginPath();
+    context.lineWidth = width;
+    context.lineCap = 'round';
+    context.moveTo(0, 0);
+    context.rotate(pos);
+    context.lineTo(0, -length);
+    context.stroke();
+    context.rotate(-pos);
 }
 
 setInterval(drawClock, 1000);
