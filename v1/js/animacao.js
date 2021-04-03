@@ -8,6 +8,9 @@ class Animacao {
         this.processamentos = [];
         this.spritesExcluir = [];
         this.processamentosExcluir = [];
+
+        this.ultimoCiclo = 0;
+        this.decorrido = 0;
     }
 
     desligar() {
@@ -56,6 +59,10 @@ class Animacao {
         //posso continuar?
         if (!this.ligado) return;
 
+        var agora = new Date().getTime();
+        if (this.ultimoCiclo == 0) this.ultimoCiclo = agora;
+        this.decorrido = agora - this.ultimoCiclo;
+
         //A cada ciclo, limpamos a tela ou desenhamos um fundo
         //this.limparTela();
 
@@ -77,6 +84,10 @@ class Animacao {
 
         //Processar exclusões
         this.processarExclusoes();
+
+        //Atualizar o instante do último ciclo
+        this.ultimoCiclo = agora;
+
         /**
          * A função de animação é chamada pelo JavaScript como uma função comum, não como um método de objeto — não podemos usar o this dentro dela
          * A solução é referenciar o objeto em uma variável e chamar uma função anônima, que por sua vez chama proximoFrame como um verdadeiro método do objeto:

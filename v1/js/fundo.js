@@ -11,7 +11,7 @@ class Fundo {
 
     atualizar() {
         //atualizar a posição de emenda
-        this.posicaoEmenda += this.velocidade;
+        this.posicaoEmenda += this.velocidade * this.animacao.decorrido / 1000;
 
         //Emenda passou da posição
         if (this.posicaoEmenda > this.imagem.height) {

@@ -22,18 +22,19 @@ class Nave {
     }
 
     atualizar() {
+        let incremento = this.velocidade * this.animacao.decorrido / 1000;
         if (this.teclado.pressionada(SETA_ESQUERDA) && this.x - OFFSET > 0) {
 
-            this.x -= this.velocidade;
+            this.x -= incremento;
         } if (this.teclado.pressionada(SETA_DIREITA) && this.x < this.context.canvas.width - 40) {
 
-            this.x += this.velocidade;
+            this.x += incremento;
         } if (this.teclado.pressionada(SETA_CIMA) && this.y - OFFSET > 0) {
 
-            this.y -= this.velocidade;
+            this.y -= incremento;
         } if (this.teclado.pressionada(SETA_BAIXO) && this.y + OFFSET < this.context.canvas.height - 40) {
 
-            this.y += this.velocidade;
+            this.y += incremento;
         }
     }
 
@@ -48,11 +49,11 @@ class Nave {
         //const velocity = { x: Math.cos(angle) * 6, y: Math.sin(angle) * 6 };
         //var t = new Tiro(this.context, this, 'green', velocity);
         //TODO criar bônus para aumentar os tiros e deixá-los mais rápidos
-        var t = new Tiro(this.context, this, 'red', { x: 0, y: -7 });
-        var t2 = new Tiro(this.context, this, 'red', { x: -1, y: -7 });
-        var t3 = new Tiro(this.context, this, 'red', { x: 1, y: -7 });
-        var t4 = new Tiro(this.context, this, 'white', { x: -2, y: -10 });
-        var t5 = new Tiro(this.context, this, 'white', { x: 2, y: -10 });
+        var t = new Tiro(this.context, this, 'red', { x: 0, y: -500 });
+        var t2 = new Tiro(this.context, this, 'red', { x: -120, y: -500 });
+        var t3 = new Tiro(this.context, this, 'red', { x: 120, y: -500 });
+        var t4 = new Tiro(this.context, this, 'white', { x: -170, y: -400 });
+        var t5 = new Tiro(this.context, this, 'white', { x: 170, y: -400 });
         this.animacao.novoSprite(t);
         this.colisor.novoSprite(t);
         this.animacao.novoSprite(t2);

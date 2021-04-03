@@ -16,8 +16,8 @@ class Tiro {
     }
 
     atualizar() {
-        this.y += this.velocity.y;
-        this.x += this.velocity.x;
+        this.y += this.velocity.y * this.animacao.decorrido / 1000;
+        this.x += this.velocity.x * this.animacao.decorrido / 1000;
 
         // Excluir o tiro quando sumir da tela
         if (this.y < 0 || this.x < 0 || this.x > this.context.canvas.width) {

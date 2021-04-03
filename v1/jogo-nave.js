@@ -54,14 +54,14 @@ function iniciarObjetos() {
 
 function init() {
     //Fundos
-    espaco.velocidade = 3;
-    estrelas.velocidade = 5;
-    nuvens.velocidade = 7;
+    espaco.velocidade = 75;
+    estrelas.velocidade = 150;
+    nuvens.velocidade = 500;
 
     //Nave
     nave.x = canvas.width / 2 - imagens.nave.width / 2;
     nave.y = canvas.height - imagens.nave.height;
-    nave.velocidade = 5;
+    nave.velocidade = 350;
 
     //Tiro
     teclado.disparou(ESPACO, function () {
@@ -96,7 +96,7 @@ function novoOvni() {
     var imgOvni = imagens.ovni;
     var ovni = new Ovni(context, imgOvni);
     // Mínimo: 5; máximo: 20
-    ovni.velocidade = aleatorio(5, 10);//Math.floor(5 + Math.random() * (20 - 5 + 1));
+    ovni.velocidade = aleatorio(500, 1000) * animacao.decorrido / 1000;//Math.floor(5 + Math.random() * (20 - 5 + 1));
     // Mínimo: 0;
     // máximo: largura do canvas - largura do ovni
     ovni.x = aleatorio(0, context.canvas.width - imgOvni.width + 1);// Math.floor(Math.random() * (context.canvas.width - imgOvni.width + 1));
