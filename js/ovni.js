@@ -39,13 +39,23 @@ class Ovni {
             ];
 
         // Desenhando os retângulos para visualização
-        // var ctx = this.context;
+        var ctx = this.context;
         // for (var i in rets) {
         //     ctx.save();
         //     ctx.strokeStyle = 'yellow';
         //     ctx.strokeRect(rets[i].x, rets[i].y, rets[i].largura, rets[i].altura);
         //     ctx.restore();
         // }
+
+         ctx.save();
+        ctx.beginPath();
+        ctx.strokeStyle = 'yellow';
+        ctx.lineWidth = 1.5;   
+        //ctx.arc(this.x+ this.imagem.width/2, this.y+this.imagem.height/2, this.imagem.height * 0.9, 0, Math.PI * 2);
+        ctx.ellipse(this.x + this.imagem.width / 2, this.y + this.imagem.height / 2, this.imagem.width * 0.45, this.imagem.height * 0.5, 0, 0, Math.PI * 2);
+        ctx.stroke();
+        ctx.restore();
+
         return rets;
     }
     colidiuCom(outro) {
