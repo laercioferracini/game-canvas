@@ -1,13 +1,15 @@
 //arquivo ovni.js
 
 class Ovni {
-    constructor(context, imagem) {
+    constructor(context, imagem, imgExplosao) {
         this.name = 'marte1';
         this.context = context;
         this.imagem = imagem;
         this.x = 0;
         this.y = 0;
         this.velocidade = 0;
+
+        this.imgExplosao = imgExplosao;
     }
     atirar() {
         //var t = new Tiro(this.context, this);
@@ -47,14 +49,14 @@ class Ovni {
         //     ctx.restore();
         // }
 
-         ctx.save();
-        ctx.beginPath();
-        ctx.strokeStyle = 'yellow';
-        ctx.lineWidth = 1.5;   
-        //ctx.arc(this.x+ this.imagem.width/2, this.y+this.imagem.height/2, this.imagem.height * 0.9, 0, Math.PI * 2);
-        ctx.ellipse(this.x + this.imagem.width / 2, this.y + this.imagem.height / 2, this.imagem.width * 0.45, this.imagem.height * 0.5, 0, 0, Math.PI * 2);
-        ctx.stroke();
-        ctx.restore();
+        //  ctx.save();
+        // ctx.beginPath();
+        // ctx.strokeStyle = 'yellow';
+        // ctx.lineWidth = 1.5;   
+        // //ctx.arc(this.x+ this.imagem.width/2, this.y+this.imagem.height/2, this.imagem.height * 0.9, 0, Math.PI * 2);
+        // ctx.ellipse(this.x + this.imagem.width / 2, this.y + this.imagem.height / 2, this.imagem.width * 0.45, this.imagem.height * 0.5, 0, 0, Math.PI * 2);
+        // ctx.stroke();
+        // ctx.restore();
 
         return rets;
     }
@@ -65,6 +67,9 @@ class Ovni {
             this.colisor.excluirSprite(this);
             this.animacao.excluirSprite(outro);
             this.colisor.excluirSprite(outro);
+
+            let explosao = new Explosao(this.context, this.imgExplosao, this.x, this.y);
+            this.animacao.novoSprite(explosao);
         }
     }
 }

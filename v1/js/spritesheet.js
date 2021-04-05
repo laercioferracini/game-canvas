@@ -5,9 +5,11 @@ class Spritesheet {
         this.imagem = imagem;
         this.linhas = linhas;
         this.colunas = colunas;
-        this.intervalo = 0;
+        this.intervalo = 60;
         this.linha = 0;
         this.coluna = 0;
+
+        this.fimDoCiclo = null;
     }
 
     proximoQuadro() {
@@ -19,8 +21,14 @@ class Spritesheet {
         if (agora - this.ultimoTempo < this.intervalo) return;
         if (this.coluna < this.colunas - 1)
             this.coluna++;
-        else
+        else {
             this.coluna = 0;
+
+            //fim do ciclo
+            if (this.fimDoCiclo) this.fimDoCiclo();
+        }
+
+
         // Guardar hora da última mudança
         this.ultimoTempo = agora;
 

@@ -13,7 +13,8 @@ function carregarImagens() {
         estrelas: 'fundo-estrelas.png',
         nuvens: 'fundo-nuvens.png',
         nave: 'nave-spritesheet.png',
-        ovni: 'ovni.png'
+        ovni: 'ovni.png',
+        explosao: 'explosao.png'
     };
 
     for (const i in imagens) {
@@ -39,7 +40,7 @@ function iniciarObjetos() {
     espaco = new Fundo(context, imagens.espaco);
     estrelas = new Fundo(context, imagens.estrelas);
     nuvens = new Fundo(context, imagens.nuvens);
-    nave = new Nave(context, teclado, imagens.nave);
+    nave = new Nave(context, teclado, imagens.nave, imagens.explosao);
 
     // Ligações entre objetos
     animacao.novoSprite(espaco);
@@ -94,9 +95,9 @@ function criacaoInimigos() {
 
 function novoOvni() {
     var imgOvni = imagens.ovni;
-    var ovni = new Ovni(context, imgOvni);
+    var ovni = new Ovni(context, imgOvni, imagens.explosao);
     // Mínimo: 5; máximo: 20
-    ovni.velocidade = aleatorio(500, 1000) * animacao.decorrido / 1000;//Math.floor(5 + Math.random() * (20 - 5 + 1));
+    ovni.velocidade = aleatorio(500, 700) * animacao.decorrido / 1000;//Math.floor(5 + Math.random() * (20 - 5 + 1));
     // Mínimo: 0;
     // máximo: largura do canvas - largura do ovni
     ovni.x = aleatorio(0, context.canvas.width - imgOvni.width + 1);// Math.floor(Math.random() * (context.canvas.width - imgOvni.width + 1));

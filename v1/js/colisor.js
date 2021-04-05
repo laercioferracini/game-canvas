@@ -96,7 +96,7 @@ class Colisor {
                     sprite2.colidiuCom(sprite1);
 
                     //tratador geral
-                    if (this.aoColidir) this.aoColidir(sprite1, sprite2);
+                    //if (this.aoColidir) this.aoColidir(sprite1, sprite2);
 
                     //Não precisa terminar de ver todos os retângulos
                     return;
