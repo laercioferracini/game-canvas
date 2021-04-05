@@ -8,8 +8,8 @@ class Tiro {
         //posicionar o tiro no bico da nave
         this.largura = 5;
         this.altura = 10;
-        this.x = nave.x + nave.imagem.width / 2 - this.largura / 2;
-        this.y = nave.y - this.altura;
+        this.x = nave.x + (nave.imagem.width / 2) / 2 - this.largura / 2;
+        this.y = nave.y ;
         this.velocity = velocity;
         //Atributos de desenho padrão
         this.cor = cor;

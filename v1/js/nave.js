@@ -19,28 +19,44 @@ class Nave {
 
         // Direção padrão
         this.direcao = DIRECAO_DIREITA;
+
+        this.spritesheet = new Spritesheet(context, imagem, 3, 2);
+        this.spritesheet.linha = 0;
+        this.spritesheet.intervalo = 1;
     }
 
     atualizar() {
         let incremento = this.velocidade * this.animacao.decorrido / 1000;
         if (this.teclado.pressionada(SETA_ESQUERDA) && this.x - OFFSET > 0) {
-
             this.x -= incremento;
+
         } if (this.teclado.pressionada(SETA_DIREITA) && this.x < this.context.canvas.width - 40) {
-
             this.x += incremento;
-        } if (this.teclado.pressionada(SETA_CIMA) && this.y - OFFSET > 0) {
 
+        } if (this.teclado.pressionada(SETA_CIMA) && this.y - OFFSET > 0) {
+            
             this.y -= incremento;
         } if (this.teclado.pressionada(SETA_BAIXO) && this.y + OFFSET < this.context.canvas.height - 40) {
-
+            
             this.y += incremento;
         }
     }
 
     desenhar() {
 
-        this.context.drawImage(this.imagem, this.x, this.y, this.imagem.width, this.imagem.height);
+        //this.context.drawImage(this.imagem, this.x, this.y, this.imagem.width, this.imagem.height);
+        
+        if (this.teclado.pressionada(SETA_ESQUERDA)) {
+            this.spritesheet.linha = 1;
+        } else if (this.teclado.pressionada(SETA_DIREITA)) {
+            this.spritesheet.linha = 2;
+        } else {
+            this.spritesheet.linha = 0;
+        }
+
+        this.spritesheet.desenhar(this.x, this.y);
+        this.spritesheet.proximoQuadro();
+        
     }
 
     atirar() {
@@ -50,20 +66,20 @@ class Nave {
         //var t = new Tiro(this.context, this, 'green', velocity);
         //TODO criar bônus para aumentar os tiros e deixá-los mais rápidos
         var t = new Tiro(this.context, this, 'red', { x: 0, y: -500 });
-        var t2 = new Tiro(this.context, this, 'red', { x: -120, y: -500 });
-        var t3 = new Tiro(this.context, this, 'red', { x: 120, y: -500 });
-        var t4 = new Tiro(this.context, this, 'white', { x: -170, y: -400 });
-        var t5 = new Tiro(this.context, this, 'white', { x: 170, y: -400 });
+        // var t2 = new Tiro(this.context, this, 'red', { x: -120, y: -500 });
+        // var t3 = new Tiro(this.context, this, 'red', { x: 120, y: -500 });
+        // var t4 = new Tiro(this.context, this, 'white', { x: -170, y: -400 });
+        // var t5 = new Tiro(this.context, this, 'white', { x: 170, y: -400 });
         this.animacao.novoSprite(t);
         this.colisor.novoSprite(t);
-        this.animacao.novoSprite(t2);
-        this.colisor.novoSprite(t2);
-        this.animacao.novoSprite(t3);
-        this.colisor.novoSprite(t3);
-        this.animacao.novoSprite(t4);
-        this.colisor.novoSprite(t4);
-        this.animacao.novoSprite(t5);
-        this.colisor.novoSprite(t5);
+        // this.animacao.novoSprite(t2);
+        // this.colisor.novoSprite(t2);
+        // this.animacao.novoSprite(t3);
+        // this.colisor.novoSprite(t3);
+        // this.animacao.novoSprite(t4);
+        // this.colisor.novoSprite(t4);
+        // this.animacao.novoSprite(t5);
+        // this.colisor.novoSprite(t5);
 
     }
 
@@ -76,13 +92,13 @@ class Nave {
                 { x: this.x + 25, y: this.y + 19, largura: 9, altura: 13 }
             ];
         // Desenhando os retângulos para visualização
-        var ctx = this.context;
-        for (var i in rets) {
-            ctx.save();
-            ctx.strokeStyle = 'yellow';
-            ctx.strokeRect(rets[i].x, rets[i].y, rets[i].largura, rets[i].altura);
-            ctx.restore();
-        }
+        // var ctx = this.context;
+        // for (var i in rets) {
+        //     ctx.save();
+        //     ctx.strokeStyle = 'yellow';
+        //     ctx.strokeRect(rets[i].x, rets[i].y, rets[i].largura, rets[i].altura);
+        //     ctx.restore();
+        // }
         return rets;
     }
 
