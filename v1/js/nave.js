@@ -22,7 +22,7 @@ class Nave {
 
         this.spritesheet = new Spritesheet(context, imagem, 3, 2);
         this.spritesheet.linha = 0;
-        this.spritesheet.intervalo = 1;
+        this.spritesheet.intervalo = 1000;
 
         this.imgExplosao = imgExplosao;
     }
@@ -57,20 +57,20 @@ class Nave {
         //var t = new Tiro(this.context, this, 'green', velocity);
         //TODO criar bônus para aumentar os tiros e deixá-los mais rápidos
         var t = new Tiro(this.context, this, 'red', { x: 0, y: -500 });
-        var t2 = new Tiro(this.context, this, 'red', { x: -120, y: -500 });
-        var t3 = new Tiro(this.context, this, 'red', { x: 120, y: -500 });
-        var t4 = new Tiro(this.context, this, 'white', { x: -170, y: -400 });
-        var t5 = new Tiro(this.context, this, 'white', { x: 170, y: -400 });
+        // var t2 = new Tiro(this.context, this, 'red', { x: -120, y: -500 });
+        // var t3 = new Tiro(this.context, this, 'red', { x: 120, y: -500 });
+        // var t4 = new Tiro(this.context, this, 'white', { x: -170, y: -400 });
+        // var t5 = new Tiro(this.context, this, 'white', { x: 170, y: -400 });
         this.animacao.novoSprite(t);
         this.colisor.novoSprite(t);
-        this.animacao.novoSprite(t2);
-        this.colisor.novoSprite(t2);
-        this.animacao.novoSprite(t3);
-        this.colisor.novoSprite(t3);
-        this.animacao.novoSprite(t4);
-        this.colisor.novoSprite(t4);
-        this.animacao.novoSprite(t5);
-        this.colisor.novoSprite(t5);
+        // this.animacao.novoSprite(t2);
+        // this.colisor.novoSprite(t2);
+        // this.animacao.novoSprite(t3);
+        // this.colisor.novoSprite(t3);
+        // this.animacao.novoSprite(t4);
+        // this.colisor.novoSprite(t4);
+        // this.animacao.novoSprite(t5);
+        // this.colisor.novoSprite(t5);
 
     }
 
@@ -98,38 +98,39 @@ class Nave {
         //Se colidir com o ovni, game over
         if (outro instanceof Ovni) {
             this.energia--;
-            if (this.energia <= 0) {
-                this.animacao.excluirSprite(this);
-                this.colisor.excluirSprite(this);
-                this.animacao.excluirSprite(outro);
-                this.colisor.excluirSprite(outro);
 
-                let explosao1 = new Explosao(this.context, this.imgExplosao, this.x, this.y);
-                let explosao2 = new Explosao(this.context, this.imgExplosao, outro.x, outro.y);
-                this.animacao.novoSprite(explosao1);
-                this.animacao.novoSprite(explosao2);
+            this.animacao.excluirSprite(this);
+            this.animacao.excluirSprite(outro);
 
-                explosao1.fimDaExplosao = function () {
+            this.colisor.excluirSprite(this);
+            this.colisor.excluirSprite(outro);
 
-                    animacao.desligar();
-                    var ctx = this.context;
-                    // ctx.save();
-                    // ctx.font = '38pt Arial';
-                    // ctx.fillStyle = 'white';
-                    // ctx.strokeStyle = 'blue';
+            let explosao1 = new Explosao(this.context, this.imgExplosao, this.x, this.y);
+            let explosao2 = new Explosao(this.context, this.imgExplosao, outro.x, outro.y);
+            this.animacao.novoSprite(explosao1);
+            this.animacao.novoSprite(explosao2);
 
-                    // var w = ctx.canvas.width;
-                    // var h = ctx.canvas.height;
+            explosao1.fimDaExplosao = function () {
 
-                    // ctx.fillText("Game over!", w / 2 - 150, h / 2 + 15, w);
-                    // ctx.strokeText("Game over!", w / 2 - 150, h / 2 + 15, w);
-                    // ctx.restore();
-                }
+                animacao.desligar();
+                var ctx = this.context;
+                ctx.save();
+                ctx.font = '38pt Arial';
+                ctx.fillStyle = 'white';
+                ctx.strokeStyle = 'blue';
 
+                var w = ctx.canvas.width;
+                var h = ctx.canvas.height;
 
-                //this.context.clearRect(0, 0, this.context.canvas.width, this.context.canvas.height);
-
+                ctx.fillText("Game over!", w / 2 - 150, h / 2 + 15, w);
+                ctx.strokeText("Game over!", w / 2 - 150, h / 2 + 15, w);
+                ctx.restore();
             }
+
+
+            //this.context.clearRect(0, 0, this.context.canvas.width, this.context.canvas.height);
+
+
         }
     }
 }

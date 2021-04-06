@@ -1,8 +1,8 @@
 const canvas = document.getElementById('canvas_animacao');
 const context = canvas.getContext('2d');
 
-var imagens, animacao, teclado, colisor, nave, criacaoInimigos;
-var totalImagens = 0, carregadas = 0;
+let imagens, animacao, teclado, colisor, nave, espaco, estrelas, nuvens;
+let totalImagens = 0, carregadas = 0;
 
 carregarImagens();
 

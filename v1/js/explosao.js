@@ -3,7 +3,7 @@ class Explosao{
         this.context = context;
         this.imagem = imagem;
         this.spritesheet = new Spritesheet(context, imagem, 1, 5);
-        this.intervalo = 1;
+        this.spritesheet.intervalo = 80;
         this.x = x;
         this.y = y;
 

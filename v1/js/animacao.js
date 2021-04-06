@@ -6,8 +6,6 @@ class Animacao {
         this.limpaTela = true;
 
         this.processamentos = [];
-        this.spritesExcluir = [];
-        this.processamentosExcluir = [];
 
         this.ultimoCiclo = 0;
         this.decorrido = 0;
@@ -19,11 +17,18 @@ class Animacao {
 
     excluirProcessamento(processamento) {
 
-        this.processamentosExcluir.push(processamento)
+        this.processamentos.forEach((p, index) => {
+            if (p == processamento)
+                this.processamentos.splice(index, 1);
+        });
     }
 
     excluirSprite(sprite) {
-        this.spritesExcluir.push(sprite);
+        this.sprites.forEach((s, index) => {
+            if (s == sprite) {
+                this.sprites.splice(index, 1);
+            }
+        });
     }
 
     ligar() {
@@ -82,9 +87,6 @@ class Animacao {
             p.processar();
         });
 
-        //Processar exclusões
-        this.processarExclusoes();
-
         //Atualizar o instante do último ciclo
         this.ultimoCiclo = agora;
 
@@ -97,33 +99,6 @@ class Animacao {
         requestAnimationFrame(function () {
             animacao.proximoFrame();
         });
-    }
-
-    processarExclusoes() {
-        // Criar novos arrays
-        var novosSprites = [];
-        var novosProcessamentos = [];
-
-        // Adicionar somente se não constar no array de excluídos
-        this.sprites.forEach((s, index) => {
-            if (this.spritesExcluir.indexOf(s) != -1) {
-
-                this.sprites.splice(index, 1);
-            }
-        });
-
-        this.processamentos.forEach((p, index) => {
-            if (this.processamentosExcluir.indexOf(p) != -1)
-                this.processamentos.splice(index, 1);
-        });
-
-        // Limpar os arrays de exclusões
-        this.spritesExcluir = [];
-        this.processamentosExcluir = [];
-
-        // Substituir os arrays velhos pelos novos
-        //this.sprites = novosSprites;
-        //this.processamentos = novosProcessamentos;
     }
 
 }

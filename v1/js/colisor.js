@@ -5,7 +5,6 @@ class Colisor {
         this.sprites = [];
         this.context = context;
         this.aoColidir = null;
-        this.spritesExcluir = [];
     }
 
     novoSprite(sprite) {
@@ -21,7 +20,7 @@ class Colisor {
             this.sprites.forEach(s2 => {
 
                 //Não colidir um sprite com ele mesmo
-                if (!(s1 == s2)) {
+                if (s1 != s2) {
                     //Gerar strings únicas para os objetos
                     var id1 = this.stringUnica(s1);
                     var id2 = this.stringUnica(s2);
@@ -43,23 +42,15 @@ class Colisor {
             });
 
         });
-        this.processarExclusoes();
     }
 
     excluirSprite(sprite) {
 
-        this.spritesExcluir.push(sprite);
-    }
-
-    processarExclusoes() {
-
-        //Percorrer o array de sprites e excluir o elemento
         this.sprites.forEach((s, index) => {
-            if (this.spritesExcluir.indexOf(s) != -1) {
+            if (sprite == s) {
                 this.sprites.splice(index, 1);
             }
         });
-        this.spritesExcluir = [];
     }
 
     retangulosColidem(ret1, ret2) {
