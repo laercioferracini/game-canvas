@@ -41,7 +41,7 @@ class Ovni {
             ];
 
         // Desenhando os retângulos para visualização
-        var ctx = this.context;
+        // var ctx = this.context;
         // for (var i in rets) {
         //     ctx.save();
         //     ctx.strokeStyle = 'yellow';
