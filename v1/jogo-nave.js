@@ -1,10 +1,12 @@
 const canvas = document.getElementById('canvas_animacao');
 const context = canvas.getContext('2d');
+const iniciar = document.getElementById('iniciar');
 
 let imagens, animacao, teclado, colisor, nave, espaco, estrelas, nuvens, inimigo;
 let totalImagens = 0, carregadas = 0;
+let musicaAcao;
 
-carregarImagens();
+
 
 function carregarImagens() {
     //Objeto com o nomedas imagens
@@ -26,7 +28,20 @@ function carregarImagens() {
         imagens[i] = img;
     }
 }
-
+function carregarMusicas() {
+    musicaAcao = new Audio();
+    musicaAcao.src = 'snd/musica-acao.mp3';
+    musicaAcao.load();
+    musicaAcao.volume = 0.8;
+    musicaAcao.loop = true;
+     
+    
+}
+iniciar.onclick = function(){
+    carregarImagens();
+    carregarMusicas();
+    musicaAcao.play();
+}
 function carregando() {
     carregadas++;
     if (carregadas == totalImagens) iniciarObjetos();
@@ -150,7 +165,7 @@ function mensagem(msg) {
     context.textBaseline = 'middle';
     var w = context.canvas.width / 2;
     var h = context.canvas.height / 2;
-    
+
     context.fillText(msg, w, h);
     context.strokeText(msg, w, h);
 

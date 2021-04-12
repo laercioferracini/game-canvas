@@ -1,3 +1,10 @@
+//arquivo explosao.js
+
+const SOM_EXPLOSAO = new Audio();
+SOM_EXPLOSAO.src = 'snd/explosao.mp3';
+SOM_EXPLOSAO.volume = 0.1;
+SOM_EXPLOSAO.load();
+
 class Explosao{
     constructor(context, imagem, x, y){
         this.context = context;
@@ -13,6 +20,9 @@ class Explosao{
             explosao.animacao.excluirSprite(explosao);
             if(explosao.fimDaExplosao) explosao.fimDaExplosao();
         }
+
+        SOM_EXPLOSAO.currentTime = 0.0;
+        SOM_EXPLOSAO.play();
     }
 
     atualizar(){

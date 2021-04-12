@@ -1,4 +1,9 @@
 // arquivo: tiro.js
+const SOM_TIRO = new Audio();
+SOM_TIRO.src = 'snd/tiro.mp3';
+SOM_TIRO.volume = 0.09;
+SOM_TIRO.load();
+
 class Tiro {
     constructor(context, nave, cor, velocity) {
         this.name = 'tiro1';
@@ -13,6 +18,8 @@ class Tiro {
         this.velocity = velocity;
         //Atributos de desenho padrão
         this.cor = cor;
+        SOM_TIRO.currentTime = 0.0;
+        SOM_TIRO.play();
     }
 
     atualizar() {
@@ -69,4 +76,6 @@ class Tiro {
     colidiuCom(outro) {
 
     }
+   
+
 }
