@@ -6,6 +6,8 @@ let imagens, animacao, teclado, colisor, nave, espaco, estrelas, nuvens, inimigo
 let totalImagens = 0, carregadas = 0;
 let musicaAcao;
 
+carregarImagens();
+carregarMusicas();
 
 
 function carregarImagens() {
@@ -34,17 +36,23 @@ function carregarMusicas() {
     musicaAcao.load();
     musicaAcao.volume = 0.8;
     musicaAcao.loop = true;
-     
-    
+
 }
-iniciar.onclick = function(){
-    carregarImagens();
-    carregarMusicas();
-    musicaAcao.play();
-}
+
 function carregando() {
+    context.save();
+    context.drawImage(imagens.espaco, 0, 0, canvas.width, canvas.height);
+    mensagem("Carregando...");
     carregadas++;
-    if (carregadas == totalImagens) iniciarObjetos();
+    var tamanhoTotal = 300;
+    var tamanho = carregadas / totalImagens * tamanhoTotal;
+    context.fillStyle = 'yellow';
+    context.fillRect(100, 250, tamanho, 50);
+    context.restore();
+    if (carregadas == totalImagens) {
+        iniciarObjetos();
+        mostrarLinkJogar();
+    }
 }
 
 function iniciarObjetos() {
@@ -85,10 +93,23 @@ function init() {
     //Pausa
     teclado.disparou(ENTER, pausarJogo);
 
-    animacao.ligar();
+    //animacao.ligar();
 
     criarInimigo();
 
+}
+iniciar.onclick = iniciarJogo;
+function mostrarLinkJogar() {
+    document.getElementById('iniciar').style.display =
+        'block';
+}
+
+function iniciarJogo() {
+
+    document.getElementById('iniciar').style.display =
+        'none';
+    musicaAcao.play();
+    animacao.ligar();
 }
 
 function criarInimigo() {
