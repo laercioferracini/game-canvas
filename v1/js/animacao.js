@@ -32,6 +32,7 @@ class Animacao {
     }
 
     ligar() {
+        this.ultimoCiclo = 0;
         this.ligado = true;
         this.proximoFrame();
     }

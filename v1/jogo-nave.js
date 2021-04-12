@@ -1,7 +1,7 @@
 const canvas = document.getElementById('canvas_animacao');
 const context = canvas.getContext('2d');
 
-let imagens, animacao, teclado, colisor, nave, espaco, estrelas, nuvens;
+let imagens, animacao, teclado, colisor, nave, espaco, estrelas, nuvens, inimigo;
 let totalImagens = 0, carregadas = 0;
 
 carregarImagens();
@@ -65,18 +65,20 @@ function init() {
     nave.velocidade = 350;
 
     //Tiro
-    teclado.disparou(ESPACO, function () {
-        nave.atirar();
-    });
+    ativarTiro(true);
+
+    //Pausa
+    teclado.disparou(ENTER, pausarJogo);
 
     animacao.ligar();
 
-    criacaoInimigos();
+    criarInimigo();
 
 }
 
-function criacaoInimigos() {
-    var inimigo = {
+function criarInimigo() {
+    inimigo = {
+
         ultimoOvni: new Date().getTime(),
 
         processar: function () {
@@ -111,4 +113,47 @@ function novoOvni() {
 
 function aleatorio(min, max) {
     return min + Math.floor(Math.random() * (max - min + 1));
+}
+
+function atirar() {
+    nave.atirar();
+}
+function pausarJogo() {
+    if (animacao.ligado) {
+        animacao.desligar();
+        ativarTiro(false);
+        mensagem("Pausado");
+
+    }
+    else {
+        inimigo.ultimoOvni = new Date().getTime();
+        animacao.ligar();
+        ativarTiro(true);
+    }
+}
+
+function ativarTiro(ativar) {
+    if (ativar) {
+        teclado.disparou(ESPACO, atirar);
+    } else {
+        teclado.disparou(ESPACO, null);
+    }
+}
+
+function mensagem(msg) {
+
+    context.save();
+    context.font = '50px palatino';
+    context.fillStyle = 'white';
+    context.strokeStyle = 'rgba(100,50,50,0.4)';
+    context.textAlign = 'center';
+    context.textBaseline = 'middle';
+    var w = context.canvas.width / 2;
+    var h = context.canvas.height / 2;
+    
+    context.fillText(msg, w, h);
+    context.strokeText(msg, w, h);
+
+    context.restore();
+
 }
