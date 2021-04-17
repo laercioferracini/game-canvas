@@ -1,8 +1,9 @@
 const canvas = document.getElementById('canvas_animacao');
 const context = canvas.getContext('2d');
 const iniciar = document.getElementById('link_jogar');
+const placar = document.getElementById('link_jogar');
 
-let imagens, animacao, teclado, colisor, nave, espaco, estrelas, nuvens, inimigo;
+let imagens, animacao, teclado, colisor, nave, espaco, estrelas, nuvens, inimigo, painel;
 let totalImagens = 0, carregadas = 0;
 let musicaAcao;
 
@@ -49,7 +50,7 @@ function carregando() {
     context.fillStyle = 'yellow';
     context.fillRect(100, 250, tamanho, 50);
     context.restore();
-    
+
     if (carregadas == totalImagens) {
         iniciarObjetos();
         mostrarLinkJogar();
@@ -65,14 +66,17 @@ function iniciarObjetos() {
     estrelas = new Fundo(context, imagens.estrelas);
     nuvens = new Fundo(context, imagens.nuvens);
     nave = new Nave(context, teclado, imagens.nave, imagens.explosao);
-
+    painel = new Painel(context, nave);
+    
     // Ligações entre objetos
     animacao.novoSprite(espaco);
     animacao.novoSprite(estrelas);
     animacao.novoSprite(nuvens);
     animacao.novoSprite(nave);
+    animacao.novoSprite(painel);
     colisor.novoSprite(nave);
     animacao.novoProcessamento(colisor);
+
     init();
 
 }
@@ -84,8 +88,7 @@ function init() {
     nuvens.velocidade = 500;
 
     //Nave
-    nave.x = canvas.width / 2 - (imagens.nave.width / 2) / 2;
-    nave.y = canvas.height - imagens.nave.height / 3;
+    nave.posicionar();
     nave.velocidade = 350;
 
     //Pausa
@@ -93,6 +96,34 @@ function init() {
 
     criarInimigo();
 
+    //Game over
+    nave.acabaramVidas = () => {
+        ativarTiro(false);
+        animacao.desligar();
+        
+        musicaAcao.pause();
+        musicaAcao.currentTime = 0.0;
+        teclado.disparou(ENTER, null);
+        context.drawImage(imagens.espaco, 0, 0, canvas.width, canvas.height);
+        mensagem("GAME OVER");
+        mostrarLinkJogar();
+        // Restaurar as condições da nave
+        nave.vidasExtras = 3;
+        nave.posicionar();
+        animacao.novoSprite(nave);
+        colisor.novoSprite(nave);
+        removerInimigos();
+    }
+
+    //Pontuação
+    colisor.aoColidir = (o1, o2) => {
+        
+        //Tiro com Ovni
+        if ((o1 instanceof Tiro && o2 instanceof Ovni) ||
+            (o1 instanceof Ovni && o2 instanceof Tiro))
+            painel.pontuacao += 10;
+
+    };
 }
 
 iniciar.onclick = iniciarJogo;
@@ -104,7 +135,8 @@ function mostrarLinkJogar() {
 function iniciarJogo() {
 
     iniciar.style.display = 'none';
-    //Tiro
+    painel.pontuacao = 0;
+    inimigo.ultimoOvni = new Date().getTime();
     ativarTiro(true);
     musicaAcao.play();
     animacao.ligar();
@@ -145,6 +177,13 @@ function novoOvni() {
     colisor.novoSprite(ovni);
 }
 
+function removerInimigos() {
+    for (var i in animacao.sprites) {
+        if (animacao.sprites[i] instanceof Ovni)
+            animacao.excluirSprite(animacao.sprites[i]);
+    }
+}
+
 function aleatorio(min, max) {
     return min + Math.floor(Math.random() * (max - min + 1));
 }
@@ -153,6 +192,7 @@ function atirar() {
     nave.atirar();
 }
 function pausarJogo() {
+
     if (animacao.ligado) {
         animacao.desligar();
         musicaAcao.pause();

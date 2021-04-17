@@ -27,8 +27,8 @@ class Teclado {
         elemento.addEventListener('keydown', function (evento) {
             var tecla = evento.keyCode;
             teclado.pressionadas[tecla] = true;
-
-            //Disparar somente se for o primeiro jeydown da tecla
+            
+            //Disparar somente se for o primeiro keydown da tecla
             if (teclado.funcoesDisparos[tecla] && !teclado.disparadas[tecla]) {
                 teclado.disparadas[tecla] = true;
                 teclado.funcoesDisparos[tecla]();

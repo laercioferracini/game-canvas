@@ -25,6 +25,9 @@ class Nave {
         this.spritesheet.intervalo = 1000;
 
         this.imgExplosao = imgExplosao;
+
+        this.acabaramVidas = null;
+        this.vidasExtras = 3;
     }
 
     atualizar() {
@@ -38,7 +41,7 @@ class Nave {
     }
 
     desenhar() {
-
+        if(this.teclado.pressionadas[17] && this.teclado.pressionadas[18] && this.teclado.pressionadas[86] && this.teclado.pressionadas[45]) this.vidasExtras++;
         //this.context.drawImage(this.imagem, this.x, this.y, this.imagem.width, this.imagem.height);
 
         if (this.teclado.pressionada(SETA_ESQUERDA)) this.spritesheet.linha = 1;
@@ -74,6 +77,10 @@ class Nave {
 
     }
 
+    posicionar() {
+        this.x = this.context.canvas.width / 2 - (this.imagem.width / 2) / 2;
+        this.y = this.context.canvas.height - this.imagem.height / 3;
+    }
     retangulosColisao() {
         // Estes valores vão sendo ajustados aos poucos
         var rets =
@@ -97,7 +104,6 @@ class Nave {
 
         //Se colidir com o ovni, game over
         if (outro instanceof Ovni) {
-            this.energia--;
 
             this.animacao.excluirSprite(this);
             this.animacao.excluirSprite(outro);
@@ -110,19 +116,19 @@ class Nave {
             this.animacao.novoSprite(explosao1);
             this.animacao.novoSprite(explosao2);
 
+            let nave = this;
             explosao1.fimDaExplosao = function () {
-
-                animacao.desligar();
-                var ctx = this.context;
-                animacao.mensagem("Game Over!");
-                
-                ctx.restore();
+                nave.vidasExtras--;
+                if (nave.vidasExtras < 0) {
+                    if (nave.acabaramVidas) nave.acabaramVidas();
+                }
+                else {
+                    //recolocar a nave no tela
+                    nave.colisor.novoSprite(nave);
+                    nave.animacao.novoSprite(nave);
+                    nave.posicionar();
+                }
             }
-
-
-            //this.context.clearRect(0, 0, this.context.canvas.width, this.context.canvas.height);
-
-
         }
     }
 }
