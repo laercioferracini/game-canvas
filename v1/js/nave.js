@@ -114,18 +114,8 @@ class Nave {
 
                 animacao.desligar();
                 var ctx = this.context;
-                ctx.save();
-                ctx.font = '50px palatino';
-                ctx.fillStyle = 'white';
-                ctx.strokeStyle = 'rgba(100,50,50,0.4)';
-                ctx.textAlign = 'center';
-                ctx.textBaseline = 'top';
-                var w = ctx.canvas.width / 2;
-                var h = ctx.canvas.height / 2;
+                animacao.mensagem("Game Over!");
                 
-                ctx.fillText("Game over!", w, h);
-                ctx.strokeText("Game over!", w, h);
-            
                 ctx.restore();
             }
 

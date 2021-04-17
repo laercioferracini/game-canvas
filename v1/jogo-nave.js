@@ -1,6 +1,6 @@
 const canvas = document.getElementById('canvas_animacao');
 const context = canvas.getContext('2d');
-const iniciar = document.getElementById('iniciar');
+const iniciar = document.getElementById('link_jogar');
 
 let imagens, animacao, teclado, colisor, nave, espaco, estrelas, nuvens, inimigo;
 let totalImagens = 0, carregadas = 0;
@@ -45,10 +45,11 @@ function carregando() {
     mensagem("Carregando...");
     carregadas++;
     var tamanhoTotal = 300;
-    var tamanho = carregadas / totalImagens * tamanhoTotal;
+    var tamanho = (carregadas / totalImagens) * tamanhoTotal;
     context.fillStyle = 'yellow';
     context.fillRect(100, 250, tamanho, 50);
     context.restore();
+    
     if (carregadas == totalImagens) {
         iniciarObjetos();
         mostrarLinkJogar();
@@ -87,27 +88,24 @@ function init() {
     nave.y = canvas.height - imagens.nave.height / 3;
     nave.velocidade = 350;
 
-    //Tiro
-    ativarTiro(true);
-
     //Pausa
     teclado.disparou(ENTER, pausarJogo);
-
-    //animacao.ligar();
 
     criarInimigo();
 
 }
+
 iniciar.onclick = iniciarJogo;
+
 function mostrarLinkJogar() {
-    document.getElementById('iniciar').style.display =
-        'block';
+    iniciar.style.display = 'block';
 }
 
 function iniciarJogo() {
 
-    document.getElementById('iniciar').style.display =
-        'none';
+    iniciar.style.display = 'none';
+    //Tiro
+    ativarTiro(true);
     musicaAcao.play();
     animacao.ligar();
 }
@@ -157,13 +155,15 @@ function atirar() {
 function pausarJogo() {
     if (animacao.ligado) {
         animacao.desligar();
+        musicaAcao.pause();
         ativarTiro(false);
-        mensagem("Pausado");
+        animacao.mensagem("Pausado");
 
     }
     else {
         inimigo.ultimoOvni = new Date().getTime();
         animacao.ligar();
+        musicaAcao.play();
         ativarTiro(true);
     }
 }
@@ -179,13 +179,13 @@ function ativarTiro(ativar) {
 function mensagem(msg) {
 
     context.save();
-    context.font = '50px palatino';
+    context.font = '55px palatino';
     context.fillStyle = 'white';
     context.strokeStyle = 'rgba(100,50,50,0.4)';
     context.textAlign = 'center';
     context.textBaseline = 'middle';
     var w = context.canvas.width / 2;
-    var h = context.canvas.height / 2;
+    var h = context.canvas.height / 3;
 
     context.fillText(msg, w, h);
     context.strokeText(msg, w, h);

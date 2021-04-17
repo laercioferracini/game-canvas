@@ -102,4 +102,22 @@ class Animacao {
         });
     }
 
+    mensagem(msg) {
+
+        context.save();
+        context.font = '55px palatino';
+        context.fillStyle = 'white';
+        context.strokeStyle = 'rgba(100,50,50,0.4)';
+        context.textAlign = 'center';
+        context.textBaseline = 'middle';
+        var w = context.canvas.width / 2;
+        var h = context.canvas.height / 3;
+
+        context.fillText(msg, w, h);
+        context.strokeText(msg, w, h);
+
+        context.restore();
+
+    }
+
 }
