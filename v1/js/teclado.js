@@ -1,51 +1,51 @@
 // arquivo: teclado.js
 // Códigos de teclas - aqui vão todos os que forem necessários
 
-let SETA_ESQUERDA = 37;
-let SETA_DIREITA = 39;
-let SETA_CIMA = 38;
-let SETA_BAIXO = 40;
-let ESPACO = 32;
-let ENTER = 13;
+const SETA_ESQUERDA = 37
+const SETA_DIREITA = 39
+const SETA_CIMA = 38
+const SETA_BAIXO = 40
+const ESPACO = 32
+const ENTER = 13
 
 class Teclado {
-    constructor(elemento) {
-        this.elemento = elemento;
+  constructor (elemento) {
+    this.elemento = elemento
 
-        //Array com as teclas pressionadas
-        this.pressionadas = [];
+    // Array com as teclas pressionadas
+    this.pressionadas = []
 
-        //Array com as teclas disparadas
-        this.disparadas = [];
+    // Array com as teclas disparadas
+    this.disparadas = []
 
-        //Funções disparos
-        this.funcoesDisparos = [];
-        
-        //Registrando o estado das teclas no array
-        var teclado = this;
+    // Funções disparos
+    this.funcoesDisparos = []
 
-        elemento.addEventListener('keydown', function (evento) {
-            var tecla = evento.keyCode;
-            teclado.pressionadas[tecla] = true;
-            
-            //Disparar somente se for o primeiro keydown da tecla
-            if (teclado.funcoesDisparos[tecla] && !teclado.disparadas[tecla]) {
-                teclado.disparadas[tecla] = true;
-                teclado.funcoesDisparos[tecla]();
-            }
-        });
+    // Registrando o estado das teclas no array
+    const teclado = this
 
-        elemento.addEventListener('keyup', function (evento) {
-            teclado.pressionadas[evento.keyCode] = false;
-            teclado.disparadas[evento.keyCode] = false;
-        });
+    elemento.addEventListener('keydown', function (evento) {
+      const tecla = evento.keyCode
+      teclado.pressionadas[tecla] = true
 
-    }
-    pressionada(tecla) {
-        return this.pressionadas[tecla];
-    }
-    disparou(tecla, callback) {
-        this.funcoesDisparos[tecla] = callback;
-    }
+      // Disparar somente se for o primeiro keydown da tecla
+      if (teclado.funcoesDisparos[tecla] && !teclado.disparadas[tecla]) {
+        teclado.disparadas[tecla] = true
+        teclado.funcoesDisparos[tecla]()
+      }
+    })
 
+    elemento.addEventListener('keyup', function (evento) {
+      teclado.pressionadas[evento.keyCode] = false
+      teclado.disparadas[evento.keyCode] = false
+    })
+  }
+
+  pressionada (tecla) {
+    return this.pressionadas[tecla]
+  }
+
+  disparou (tecla, callback) {
+    this.funcoesDisparos[tecla] = callback
+  }
 }
